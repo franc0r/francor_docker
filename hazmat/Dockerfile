@@ -31,7 +31,7 @@ WORKDIR /opt/ros/kinetic/src/ohm_rrl_perception
 RUN git checkout d79e9b7bf56d14d0926423a3f62f66731f016f9c
 
 # Remove unused folders
-RUN rm -r ohm_rrl_cdetection ohm_rrl_motiondetection
+RUN rm -r ohm_rrl_cdetection 
 
 # Change workdir to ROS
 WORKDIR /opt/ros/kinetic
@@ -39,6 +39,8 @@ WORKDIR /opt/ros/kinetic
 # Set rosmaster
 ENV ROS_MASTER=192.168.2.10
 ENV ROS_MASTER_URI=http://192.168.2.10:11311/
+ENV ROS_HOSTNAME=192.168.2.10
+ENV ROS_IP=192.168.2.10
 
 # Build hazmat node
 RUN /bin/bash -c 'source setup.bash && catkin_make'
