@@ -5,10 +5,11 @@ on:
     branches: [ master ]
     paths:
     - 'ros2-base/**'
+    - '.github/workflows/ros2-base.yaml'
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: Default
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
