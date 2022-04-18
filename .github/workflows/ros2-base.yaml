@@ -5,6 +5,8 @@ on:
     paths:
     - 'ros2-base/**'
     - '.github/workflows/ros2-base.yaml'
+env:
+  TAG: $(date +%s)
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -24,4 +26,4 @@ jobs:
         with:
           context: "{{defaultContext}}:ros2-base"
           push: true
-          tags: franc0r/ros2-base:${{date +%s}},franc0r/ros2-base:latest
+          tags: franc0r/ros2-base:${{env.TAG}},franc0r/ros2-base:latest
