@@ -47,5 +47,3 @@ RUN git clone --branch feat/rmd_x8_drives https://github.com/franc0r/libfrancor.
     && rm -r /opt/francor/libfrancor/build
 
 WORKDIR /opt/ros2_ws/
-
-# Test workflow
