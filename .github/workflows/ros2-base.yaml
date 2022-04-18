@@ -5,12 +5,14 @@ on:
     paths:
     - 'ros2-base/**'
     - '.github/workflows/ros2-base.yaml'
-env:
-  TAG: $(date +%s)
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - 
+        name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +%s)"
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -26,4 +28,4 @@ jobs:
         with:
           context: "{{defaultContext}}:ros2-base"
           push: true
-          tags: franc0r/ros2-base:${{env.TAG}},franc0r/ros2-base:latest
+          tags: franc0r/ros2-base:${{steps.date.outputs.date}},franc0r/ros2-base:latest
