@@ -44,14 +44,14 @@ RUN apt-get update \
 RUN git clone --branch feat/rmd_x8_drives https://github.com/franc0r/libfrancor.git /opt/francor/libfrancor \
     && mkdir -p /opt/francor/libfrancor/build \
     && (cd /opt/francor/libfrancor/build && cmake -D BUILD_OPENCV_COMPONENTS=Off -D BUILD_EXAMPLES=Off .. && make && make install) \
-    && rm -r /opt/francor/libfrancor/build
+    && rm -r /opt/francor/libfrancor/build \
+    && echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
 
 # Setup workdir
 WORKDIR /opt/ros2_ws/
 
 # Setup entrypoint
 COPY ./ros_entrypoint.sh /
-
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
 
