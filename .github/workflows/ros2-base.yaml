@@ -28,4 +28,4 @@ jobs:
         with:
           context: "{{defaultContext}}:ros2-base"
           push: true
-          tags: franc0r/ros2-base:${{steps.date.outputs.date}},franc0r/ros2-base:latest
+          tags: franc0r/ros2-base:${{steps.date.outputs.date}},franc0r/ros2-base:galactic,franc0r/ros2-base:latest
