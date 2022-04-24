@@ -45,10 +45,14 @@ RUN git clone --branch feat/rmd_x8_drives https://github.com/franc0r/libfrancor.
     && mkdir -p /opt/francor/libfrancor/build \
     && (cd /opt/francor/libfrancor/build && cmake -D BUILD_OPENCV_COMPONENTS=Off -D BUILD_EXAMPLES=Off .. && make && make install) \
     && rm -r /opt/francor/libfrancor/build \
+    && /sbin/ldconfig \
     && echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /root/.bashrc
 
 # Setup workdir
 WORKDIR /opt/ros2_ws/
+
+# Build workspace
+RUN /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash && colcon build"
 
 # Setup entrypoint
 COPY ./ros_entrypoint.sh /
