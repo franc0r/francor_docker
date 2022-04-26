@@ -1,0 +1,13 @@
+#!/bin/bash
+IMAGE_TYPE=$1
+CONTAINER_USER=user
+IMAGE_NAME=francor/ros2/base
+IMAGE_VERSION=1.0
+
+if [ "base" = "$IMAGE_TYPE" ]; then
+    docker run -td --name francor_ros2_base --net=host --pid=host francor/ros2/base:$IMAGE_VERSION
+elif [ "gui" = "$IMAGE_TYPE" ]; then
+    docker run -td --name francor_ros2_gui --volume=/tmp/.X11-unix:/tmp/.X11-unix:rw --net=host --pid=host --env=DISPLAY francor/ros2/gui:$IMAGE_VERSION
+else
+    echo "usage: start-ros2-container <base|gui>"
+fi
