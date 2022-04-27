@@ -12,4 +12,10 @@ ros2-francor: ros2-base
 ros2-francor-gui: ros2-gui
 	docker build -t franc0r/ros2-francor-gui:$(image_version) francor_gui
 
+push: ros2-francor-gui ros2-francor
+	docker push franc0r/ros2-base:$(image_version)
+	docker push franc0r/ros2-gui::$(image_version)
+	docker push franc0r/ros2-francor:$(image_version)
+	docker push franc0r/ros2-francor-gui:$(image_version)
+
 all: ros2-francor-gui ros2-francor
