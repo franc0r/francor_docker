@@ -1,4 +1,4 @@
-FROM francor/ros2/base:1.0
+FROM francor/ros2-base:galactic
 
 # Setup environment
 ENV ROS_DISTRO galactic
