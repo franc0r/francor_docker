@@ -18,12 +18,19 @@ RUN \
     libann-dev \
     libflann-dev \
     libvtk6-dev \
+    libxml++2.6-dev \
+    liblua5.1-dev \
+    libopenni-dev \
+    libudev-dev \
+    freeglut3-dev \
     ## Get sources.
     && cd /tmp \
     && git clone https://github.com/autonohm/obviously.git \
-    && cd obviously \
+    && cd obviously/build/release \
+    && sed -i 's+ADD_SUBDIRECTORY(../../obdevice obdevice)+#ADD_SUBDIRECTORY(../../obdevice obdevice)+g' CMakeLists.txt \
+    && sed -i 's+ADD_SUBDIRECTORY(../../applications applications)+#ADD_SUBDIRECTORY(../../applications applications)+g' CMakeLists.txt \
     && export OBVIOUSLY_ROOT=/tmp/obviously \
-    && cmake build/release -DCMAKE_BUILD_TYPE=Release \
+    && cmake . -DCMAKE_BUILD_TYPE=Release \
     && make -j8 \
     && make install \
 ########################################################
@@ -33,4 +40,3 @@ RUN \
 
 # Setup workdir
 WORKDIR /home/$USER
-
