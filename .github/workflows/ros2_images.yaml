@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ../ros2
+        working-directory: ./ros2
     steps:
+      - uses: actions/checkout@master
       - name: Build Images
         run:  make ros2-base
