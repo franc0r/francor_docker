@@ -1,7 +1,7 @@
 FROM nvidia/cuda:11.0-base
 # Enable line above to use nvidia gpu support. Please see:
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
-FROM francor/ros2-base:galactic
+FROM franc0r/ros2-base:galactic
 
 # Setup environment
 ENV ROS_DISTRO galactic
