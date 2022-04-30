@@ -19,7 +19,5 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PW }}
 
       - uses: actions/checkout@master
-      - name: Build Images
-        run:  make all
-      - name: Push Images
+      - name: Build & Push Images
         run: make push
