@@ -6,7 +6,7 @@ on:
     - 'ros2/**'
     - '.github/workflows/ros2_images.yaml'
 jobs:
-  docker:
+  francor-ros2-images:
     runs-on: ubuntu-latest
     defaults:
       run:

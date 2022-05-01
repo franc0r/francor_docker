@@ -24,6 +24,7 @@ RUN \
     gnupg \
     git \
     build-essential \
+    sudo \
 ########################################################
 # Install ROS
 ## Get package archive key and ROS source list entry.
@@ -38,6 +39,8 @@ RUN \
 ########################################################
 # Add non root user for development
     && useradd --create-home --shell /bin/bash $USER \
+    && echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && /sbin/usermod -aG sudo $USER \
 ########################################################
 # Add line for sourcing ROS environment.
     && echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USER/.bashrc \
