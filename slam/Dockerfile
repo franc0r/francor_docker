@@ -1,4 +1,4 @@
-FROM francor/ros2/base:1.0
+FROM franc0r/ros2-base:galactic
 
 # Setup environment
 ENV ROS_DISTRO galactic
@@ -23,16 +23,20 @@ RUN \
     libopenni-dev \
     libudev-dev \
     freeglut3-dev \
+    libboost-thread-dev \
     ## Get sources.
     && cd /tmp \
     && git clone https://github.com/autonohm/obviously.git \
     && cd obviously/build/release \
+    ## Only build needed modules.
     && sed -i 's+ADD_SUBDIRECTORY(../../obdevice obdevice)+#ADD_SUBDIRECTORY(../../obdevice obdevice)+g' CMakeLists.txt \
     && sed -i 's+ADD_SUBDIRECTORY(../../applications applications)+#ADD_SUBDIRECTORY(../../applications applications)+g' CMakeLists.txt \
     && export OBVIOUSLY_ROOT=/tmp/obviously \
     && cmake . -DCMAKE_BUILD_TYPE=Release \
     && make -j8 \
+    ## Install library
     && make install \
+    && cp ../../obcore/base/System.inl /usr/local/usr/include/obviously/obcore/base/ \
 ########################################################
 # Clean up
     && apt-get clean \
