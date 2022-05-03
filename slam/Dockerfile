@@ -6,6 +6,8 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV USER user
 
+SHELL ["/bin/bash", "-c"]
+
 ########################################################
 # Install dependencies
 RUN \
@@ -26,7 +28,7 @@ RUN \
     libboost-thread-dev \
     ## Get sources.
     && cd /tmp \
-    && git clone https://github.com/autonohm/obviously.git \
+    && git clone --branch master https://github.com/autonohm/obviously.git \
     && cd obviously/build/release \
     ## Only build needed modules.
     && sed -i 's+ADD_SUBDIRECTORY(../../obdevice obdevice)+#ADD_SUBDIRECTORY(../../obdevice obdevice)+g' CMakeLists.txt \
@@ -41,6 +43,18 @@ RUN \
 # Clean up
     && apt-get clean \
     && rm /tmp/obviously -rf
+
+USER $USER
+RUN \
+    # Build slam package.
+    cd \
+    && mkdir -p ros2/src \
+    && cd ros2/src \
+    && git clone --branch feature/ros2 https://github.com/franc0r/ohm_tsd_slam.git \
+    && cd .. \
+    && source /opt/ros/$ROS_DISTRO/setup.bash \
+    && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release \
+    && source install/setup.bash
 
 # Setup workdir
 WORKDIR /home/$USER
