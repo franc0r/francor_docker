@@ -54,7 +54,10 @@ RUN \
     && cd .. \
     && source /opt/ros/$ROS_DISTRO/setup.bash \
     && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release \
-    && source install/setup.bash
+########################################################
+# Add line for sourcing ROS environment.
+    && echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USER/.bashrc \
+    && echo "source ~/ros2/install/setup.bash" >> /home/$USER/.bashrc
 
 # Setup workdir
 WORKDIR /home/$USER
