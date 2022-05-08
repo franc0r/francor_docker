@@ -8,6 +8,9 @@ on:
 jobs:
   francor-ros2-images:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./slam
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -17,4 +20,4 @@ jobs:
 
       - uses: actions/checkout@master
       - name: Build & Push SLAM Image
-        run: make slam && docker push franc0r/ros2-slam:galactic 
+        run: docker build -t franc0r/ros2-slam:galactic . && docker push franc0r/ros2-slam:galactic 
