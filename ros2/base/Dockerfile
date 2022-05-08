@@ -36,6 +36,10 @@ RUN \
     && apt-get install -q -y --no-install-recommends \
     ros-galactic-ros-base \
     python3-colcon-common-extensions \
+# Install image transport
+    ros-galactic-usb-cam \
+    ros-galactic-image-transport \
+    ros-galactic-image-transport-plugins \
 ########################################################
 # Add non root user for development
     && useradd --create-home --shell /bin/bash $USER \
