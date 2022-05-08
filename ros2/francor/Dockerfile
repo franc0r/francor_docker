@@ -13,6 +13,10 @@ RUN \
     && apt-get install -q -y --no-install-recommends \
     libflann-dev \
     can-utils \
+    # Image transport
+    ros-galactic-usb-cam \
+    ros-galactic-image-transport \
+    ros-galactic-image-transport-plugins \
     # Get source of libfrancor, build and install it.
     && git clone --branch feat/rmd_x8_drives https://github.com/franc0r/libfrancor.git /opt/francor/libfrancor \
     && mkdir -p /opt/francor/libfrancor/build \
