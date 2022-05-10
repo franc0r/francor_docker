@@ -12,7 +12,11 @@ RUN (cd /root/ && wget -q https://github.com/opencv/opencv/archive/refs/tags/4.2
 RUN mkdir -p /root/opencv-4.2.0/build
 WORKDIR /root/opencv-4.2.0/build    
 
-RUN cmake -DOPENCV_ENABLE_NONFREE:BOOL=ON -DBUILD_SHARED_LIBS=OFF \
-  	  -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local \
-  	  -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.2.0/modules ..
-RUN make -j 12
+RUN cmake \
+    -DOPENCV_ENABLE_NONFREE:BOOL=ON \
+    -D WITH_VTK=Off \
+    -DBUILD_SHARED_LIBS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr/local \
+    -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.2.0/modules ..
+RUN make -j 12 
