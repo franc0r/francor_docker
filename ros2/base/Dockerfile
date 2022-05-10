@@ -52,6 +52,8 @@ RUN \
 # Clean up
     && apt-get clean
 
+ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
 # Setup workdir
 WORKDIR /home/$USER
 
