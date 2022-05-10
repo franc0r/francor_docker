@@ -5,7 +5,6 @@ FROM ros:kinetic-perception-xenial
 
 # Update & Upgrade
 RUN apt-get -y update \
-    && apt-get -y upgrade \
     && apt-get -y install \
     tmux \
     ros-kinetic-find-object-2d \
@@ -49,8 +48,9 @@ RUN /bin/bash -c 'source setup.bash && catkin_make'
 COPY launch/camera.launch /opt/ros/kinetic/src/ohm_rrl_perception/ohm_rrl_perception_launch/launch/
 COPY launch/hazmat.launch /opt/ros/kinetic/src/ohm_rrl_perception/ohm_rrl_perception_launch/launch/
 COPY launch/motion.launch /opt/ros/kinetic/src/ohm_rrl_perception/ohm_rrl_perception_launch/launch/
+COPY launch_tmux.sh /
 
 ENV VIDEO_DEVICE="/dev/video0"
 
 # Launch node
-CMD /bin/bash -c "source devel/setup.bash && roslaunch ohm_rrl_perception_launch camera.launch"
+CMD /bin/bash -c "(cd / && ./launch_tmux.sh)"
