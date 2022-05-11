@@ -1,0 +1,23 @@
+name: Build & Publish ROS2 Images
+on:
+  push:
+    branches: [ master ]
+    paths:
+    - 'ros2/**'
+    - '.github/workflows/ros2_images.yaml'
+jobs:
+  francor-ros2-images:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ros2
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_PW }}
+
+      - uses: actions/checkout@master
+      - name: Build & Push Images
+        run: make push
