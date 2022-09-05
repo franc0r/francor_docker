@@ -1,7 +1,7 @@
-FROM franc0r/ros2-gui:galactic
+FROM franc0r/ros2-gui:humble
 
 # Setup environment
-ENV ROS_DISTRO galactic
+ENV ROS_DISTRO humble
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV USER user
