@@ -1,4 +1,4 @@
-image_version=galactic
+image_version=humble
 
 ros2-base:
 	docker build -t franc0r/ros2-base:$(image_version) base
@@ -12,7 +12,10 @@ ros2-francor: ros2-base
 ros2-francor-gui: ros2-gui
 	docker build -t franc0r/ros2-francor-gui:$(image_version) francor_gui
 
-ros2-francor-dev: ros2-base
+ros2-francor-simulation: ros2-gui
+	docker build -t franc0r/ros2-simulation:$(image_version) francor_simulation
+
+ros2-francor-dev: ros2-francor-gui
 	docker build -t franc0r/ros2-francor-dev:$(image_version) francor_dev
 
 ros2-francor-opencv-gui: ros2-gui

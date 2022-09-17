@@ -1,7 +1,8 @@
-FROM ubuntu:focal
+FROM ubuntu:jammy
 
 # Setup environment
-ENV ROS_DISTRO galactic
+ENV UBUNTU_DISTRO jammy
+ENV ROS_DISTRO humble
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV USER user
@@ -29,17 +30,17 @@ RUN \
 # Install ROS
 ## Get package archive key and ROS source list entry.
     && curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg \
-    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu focal main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $UBUNTU_DISTRO main" | tee /etc/apt/sources.list.d/ros2.list > /dev/null \
     && apt-get update \
 ########################################################
 # Install ROS packages
     && apt-get install -q -y --no-install-recommends \
-    ros-galactic-ros-base \
+    ros-$ROS_DISTRO-ros-base \
     python3-colcon-common-extensions \
 # Install image transport
-    ros-galactic-usb-cam \
-    ros-galactic-image-transport \
-    ros-galactic-image-transport-plugins \
+    ros-$ROS_DISTRO-usb-cam \
+    ros-$ROS_DISTRO-image-transport \
+    ros-$ROS_DISTRO-image-transport-plugins \
 ########################################################
 # Add non root user for development
     && useradd --create-home --shell /bin/bash $USER \

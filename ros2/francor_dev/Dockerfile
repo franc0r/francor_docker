@@ -1,4 +1,4 @@
-FROM franc0r/ros2-francor-gui:galactic
+FROM franc0r/ros2-francor-gui:humble
 
 # Install tools for development container
 RUN apt-get update \
