@@ -14,7 +14,8 @@ RUN \
     libflann-dev \
     can-utils \
     # Get source of libfrancor, build and install it.
-    && git clone --branch feat/rmd_x8_drives https://github.com/franc0r/libfrancor.git /opt/francor/libfrancor \
+    #&& git clone --branch feat/rmd_x8_drives https://github.com/franc0r/libfrancor.git /opt/francor/libfrancor \
+    && git clone https://github.com/franc0r/libfrancor.git /opt/francor/libfrancor \
     && mkdir -p /opt/francor/libfrancor/build \
     && (cd /opt/francor/libfrancor/build && cmake -D BUILD_OPENCV_COMPONENTS=Off -D BUILD_EXAMPLES=Off .. && make && make install) \
     && rm -r /opt/francor/libfrancor/build
