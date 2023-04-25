@@ -25,7 +25,7 @@ RUN \
     libopenni-dev \
     libudev-dev \
     freeglut3-dev \
-    libboos t-thread-dev \
+    libboost-thread-dev \
     ros-$ROS_DISTRO-fastrtps \
     ros-$ROS_DISTRO-rmw-fastrtps-cpp \
     ## Get sources.
