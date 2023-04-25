@@ -1,7 +1,7 @@
-FROM franc0r/ros2-base:galactic
+FROM franc0r/ros2-gui:humble
 
 # Setup environment
-ENV ROS_DISTRO galactic
+ENV ROS_DISTRO humble
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV USER user
@@ -19,13 +19,15 @@ RUN \
     libgslcblas0 \
     libann-dev \
     libflann-dev \
-    libvtk6-dev \
+#    libvtk7-dev \
     libxml++2.6-dev \
     liblua5.1-dev \
     libopenni-dev \
     libudev-dev \
     freeglut3-dev \
     libboost-thread-dev \
+    ros-$ROS_DISTRO-fastrtps \
+    ros-$ROS_DISTRO-rmw-fastrtps-cpp \
     ## Get sources.
     && cd /tmp \
     && git clone --branch master https://github.com/autonohm/obviously.git \
@@ -33,6 +35,7 @@ RUN \
     ## Only build needed modules.
     && sed -i 's+ADD_SUBDIRECTORY(../../obdevice obdevice)+#ADD_SUBDIRECTORY(../../obdevice obdevice)+g' CMakeLists.txt \
     && sed -i 's+ADD_SUBDIRECTORY(../../applications applications)+#ADD_SUBDIRECTORY(../../applications applications)+g' CMakeLists.txt \
+    && sed -i 's+ADD_SUBDIRECTORY(../../obgraphic obgraphic)+#ADD_SUBDIRECTORY(../../obgraphic obgraphic)+g' CMakeLists.txt \    
     && export OBVIOUSLY_ROOT=/tmp/obviously \
     && cmake . -DCMAKE_BUILD_TYPE=Release \
     && make -j8 \
