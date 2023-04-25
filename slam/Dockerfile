@@ -1,4 +1,4 @@
-FROM franc0r/ros2-gui:humble
+FROM franc0r/ros2-base:humble
 
 # Setup environment
 ENV ROS_DISTRO humble
