@@ -25,7 +25,7 @@ RUN \
     libopenni-dev \
     libudev-dev \
     freeglut3-dev \
-    libboost-thread-dev \
+    libboos t-thread-dev \
     ros-$ROS_DISTRO-fastrtps \
     ros-$ROS_DISTRO-rmw-fastrtps-cpp \
     ## Get sources.
@@ -68,3 +68,8 @@ RUN \
 
 # Setup workdir
 WORKDIR /home/$USER
+
+CMD export RMW_IMPLEMENTATION=rmw_fastrtps_cpp \
+    && export FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/fastrtps_profile.xml \
+    && source /home/$USER/install/setup.bash \
+    && ros2 launch ohm_tsd_slam slam.launch.py
