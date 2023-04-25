@@ -48,6 +48,8 @@ RUN \
     && rm /tmp/obviously -rf
 
 USER $USER
+COPY ./fastrtps_profile.xml /home/$USER/
+
 RUN \
     # Build slam package.
     cd \
@@ -59,6 +61,7 @@ RUN \
     && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release \
 ########################################################
 # Add line for sourcing ROS environment.
+    && export FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/fastrtps_profile.xml \
     && echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USER/.bashrc \
     && echo "source ~/ros2/install/setup.bash" >> /home/$USER/.bashrc
 
