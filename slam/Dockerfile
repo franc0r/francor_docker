@@ -61,7 +61,8 @@ RUN \
     && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release \
 ########################################################
 # Add line for sourcing ROS environment.
-    && export FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/fastrtps_profile.xml \
+    && echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> /home/$USER/.bashrc \
+    && echo "export FASTRTPS_DEFAULT_PROFILES_FILE=/home/$USER/fastrtps_profile.xml" >> /home/$USER/.bashrc \
     && echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> /home/$USER/.bashrc \
     && echo "source ~/ros2/install/setup.bash" >> /home/$USER/.bashrc
 
